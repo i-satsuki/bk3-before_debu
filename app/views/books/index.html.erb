@@ -43,6 +43,26 @@
 					</td>
 					<td><%= link_to book.title, book_path(book), class: "book_#{book.id}" %></td>
 					<td><%= book.body %></td>
+					<!-- いいね機能 -->
+					<td>
+						<% if book.favorited_by?(current_user) %>
+						  <%= link_to book_favorites_path(book), method: :delete do %>
+						    <i class="fa fa-heart" aria-hidden="true" style="color: #000;"></i>
+						    <%= book.favorites.count %>
+						  <% end %>
+						<% else %>
+						  <%= link_to book_favorites_path(book), method: :post do %>
+						    <i class="fa fa-heart-o" aria-hidden="true"></i>
+						    <%= book.favorites.count %>
+						  <% end %>
+						<% end %>
+					</td>
+					<!-- いいね機能 -->
+					<!-- コメント件数 -->
+					<td>
+				    	<p class="comment-count">コメント数：<%= book.book_comments.count %></p>
+					</td>
+					<!-- コメント件数 -->
 				</tr>
 				<% end %>
 			</tbody>
@@ -53,3 +73,5 @@
 
 	</div>
 </div>
+
+<script src="https://kit.fontawesome.com/0c954d0bf2.js" crossorigin="anonymous"></script>
